@@ -116,9 +116,9 @@ export class App extends Component {
           />
         )}
         {loading && <Loader />}
-        {queryResult && queryResult.length !== totalQueryResult && !loading && (
-          <Button onClick={this.incrementPage} />
-        )}
+        {queryResult.length > 11 &&
+          queryResult.length !== totalQueryResult &&
+          !loading && <Button onClick={this.incrementPage} />}
       </div>
     );
   }
