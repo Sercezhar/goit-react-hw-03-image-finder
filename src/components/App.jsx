@@ -9,6 +9,7 @@ import { Loader } from './Loader';
 import { Button } from './Button';
 import { FetchImages } from 'services/images-api';
 import { Modal } from './Modal';
+import { applyDarkTheme } from 'services/theme-switcher';
 
 export class App extends Component {
   state = {
@@ -19,6 +20,7 @@ export class App extends Component {
     isModalOpen: false,
     modalImage: null,
     totalQueryResult: 0,
+    isDarkTheme: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -91,6 +93,14 @@ export class App extends Component {
     });
   };
 
+  toggleTheme = () => {
+    this.setState(prevState => ({
+      isDarkTheme: !prevState.isDarkTheme,
+    }));
+
+    applyDarkTheme(this.state.isDarkTheme);
+  };
+
   render() {
     const {
       searchQuery,
@@ -104,7 +114,10 @@ export class App extends Component {
     return (
       <div className={styles.App}>
         <ToastContainer autoClose={3000} />
-        <Searchbar onSubmit={this.handleFormSubmit} />
+        <Searchbar
+          onSubmit={this.handleFormSubmit}
+          changeTheme={this.toggleTheme}
+        />
         {queryResult && (
           <ImageGallery images={queryResult} openModal={this.enlargeImage} />
         )}

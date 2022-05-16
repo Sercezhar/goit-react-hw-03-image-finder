@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import styles from './Searchbar.module.css';
-import { IoSearch } from 'react-icons/io5';
+import { IoSearch, IoMoon, IoSunny } from 'react-icons/io5';
 
 export class Searchbar extends Component {
   state = {
@@ -31,7 +31,7 @@ export class Searchbar extends Component {
         <form className={styles.SearchForm}>
           <button type="submit" className={styles['SearchForm-button']}>
             <span className={styles['SearchForm-button-label']}>Search</span>
-            <IoSearch color="#fff" size="25" />
+            <IoSearch className={styles['SearchForm-icon']} />
           </button>
 
           <input
@@ -45,6 +45,20 @@ export class Searchbar extends Component {
             placeholder="Search images and photos"
           />
         </form>
+
+        <div className={styles.ThemeSwitcher}>
+          <input
+            className={styles['ThemeSwitcher-checkbox']}
+            type="checkbox"
+            onChange={this.props.changeTheme}
+          />
+          <IoSunny
+            className={`${styles['SearchForm-icon']} ${styles['SearchForm-icon--sun']}`}
+          />
+          <IoMoon
+            className={`${styles['SearchForm-icon']} ${styles['SearchForm-icon--moon']}`}
+          />
+        </div>
       </header>
     );
   }
